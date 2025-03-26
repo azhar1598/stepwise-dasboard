@@ -70,7 +70,7 @@ const Dashboard = () => {
   return (
     <div className="main-content">
       <Title order={1} ta="left" mb="xl" style={{ color: "#2c3e50" }}>
-        Dashboard Overview
+        Insights Overview
       </Title>
 
       <Grid>

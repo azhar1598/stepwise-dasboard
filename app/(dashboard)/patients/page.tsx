@@ -33,8 +33,7 @@ import React, { useEffect, useState } from "react";
 // import { PrintLayout } from "./PrintLayout";
 import { checkStatus } from "@/lib/constants";
 import { useTableQuery } from "@/lib/hooks/useTableQuery";
-import PreviewQR from "../stores/add/PreviewQR";
-import { PrintLayout } from "../stores/PrintLayout";
+
 import { patientData } from "@/apiData";
 import { useRouter } from "next/navigation";
 
@@ -93,16 +92,34 @@ function Patients() {
     {
       accessor: "actions",
       title: <Box mr={6}>Actions</Box>,
-      textAlign: "right",
+      textAlign: "left",
       render: (record: any) => (
-        <Button
-          style={{ fontSize: "12px" }}
-          variant="table"
-          onClick={() => router.push(`/patients/customize/${record.id}`)}
-          leftSection={<IconQrcode size={16} />}
-        >
-          App Settings
-        </Button>
+        <Group>
+          <Button
+            style={{ fontSize: "12px" }}
+            variant="table-btn-primary"
+            onClick={() => router.push(`/patients/edit/${record.id}`)}
+            leftSection={<IconEdit size={16} />}
+          >
+            Edit
+          </Button>
+          <Button
+            style={{ fontSize: "12px" }}
+            variant="table-btn-danger"
+            onClick={() => router.push(`/patients/customize/${record.id}`)}
+            leftSection={<IconTrash size={16} />}
+          >
+            Delete
+          </Button>
+          {/* <Button
+            style={{ fontSize: "12px" }}
+            variant="table"
+            onClick={() => router.push(`/patients/customize/${record.id}`)}
+            leftSection={<IconQrcode size={16} />}
+          >
+            App Settings
+          </Button> */}
+        </Group>
       ),
     },
   ];
@@ -117,8 +134,28 @@ function Patients() {
   const filters = [
     {
       id: "type",
-      label: "Merchants",
-      options: [{ value: "1", label: "Type 1" }],
+      label: "Patients",
+      options: [
+        { value: "all", label: "All" },
+        { value: "1", label: "Patient 1" },
+        { value: "2", label: "Patient 2" },
+        { value: "3", label: "Patient 3" },
+        { value: "4", label: "Patient 4" },
+        { value: "5", label: "Patient 5" },
+        { value: "6", label: "Patient 6" },
+        { value: "7", label: "Patient 7" },
+      ],
+      // onChange: (value) => handleTypeChange(value),
+    },
+    {
+      id: "gender",
+      label: "Gender",
+      options: [
+        { value: "all", label: "All" },
+        { value: "male", label: "Male" },
+        { value: "female", label: "Female" },
+        { value: "other", label: "Other" },
+      ],
       // onChange: (value) => handleTypeChange(value),
     },
     // ... more filters
@@ -186,6 +223,7 @@ function Patients() {
         <FilterLayout
           filters={filters}
           onSearch={handleSearch}
+          searchable={false}
           // onRecordsPerPageChange={handleRecordsPerPage}
         />
         <CustomTable
@@ -210,19 +248,7 @@ function Patients() {
         title="Store QR Code"
         size="md"
         centered
-      >
-        <Stack className="items-center p-4">
-          <PreviewQR storeInfo={storeInfo} qrCode={qrCode} />
-          <Button
-            onClick={downloadQRCode}
-            leftSection={<IconDownload size={16} />}
-            className="mt-4"
-          >
-            Download QR Code
-          </Button>
-          <PrintLayout qrCode={qrCode} storeInfo={storeInfo} />
-        </Stack>
-      </Modal>
+      ></Modal>
     </>
   );
 }

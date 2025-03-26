@@ -203,6 +203,7 @@ function ProductsListing() {
         <FilterLayout
           filters={!id ? [filters[0]] : filters}
           onSearch={handleSearch}
+          searchable={false}
           // onRecordsPerPage={handleRecordsPerPage}
         />
         <CustomTable

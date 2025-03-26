@@ -4,12 +4,13 @@ import { TimeInput } from "@mantine/dates";
 import { z } from "zod";
 import { PageHeader } from "@/components/common/PageHeader";
 import PageMainWrapper from "@/components/common/PageMainWrapper";
-import PatientForm from "./PatientForm";
+import PatientForm from "./TaskForm";
 import { Stack } from "@mantine/core";
 import { Suspense } from "react";
 import { patientSchema } from "@/lib/schema";
+import TaskForm from "./TaskForm";
 
-const StoreRegistrationContent = () => {
+const AddTask = () => {
   const form = useForm({
     validate: zodResolver(patientSchema),
     initialValues: {
@@ -30,20 +31,12 @@ const StoreRegistrationContent = () => {
   return (
     <Stack>
       {" "}
-      <PageHeader title={`Add Patient `} />
+      <PageHeader title={`Add Task `} />
       <PageMainWrapper>
-        <PatientForm form={form} />
+        <TaskForm form={form} />
       </PageMainWrapper>
     </Stack>
   );
 };
 
-const StoreRegistration = () => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <StoreRegistrationContent />
-    </Suspense>
-  );
-};
-
-export default StoreRegistration;
+export default AddTask;

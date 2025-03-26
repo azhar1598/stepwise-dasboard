@@ -13,106 +13,44 @@ import {
   Switch,
   Stack,
   Paper,
+  Badge,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import React, { useState } from "react";
 import { z } from "zod";
 
-const storeSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  categoryId: z.number(),
-  tagLine: z.string(),
-  description: z.string(),
-  storeLogo: z.any(),
-  licenseId: z.string(),
-  address: z.string(),
-  state: z.string(),
-  pincode: z.number(),
-  city: z.string(),
-  latitude: z.string(),
-  longitude: z.string(),
-  qrTheme: z.object({
-    titleFontSize: z.number(),
-    primaryColor: z.string(),
-    secondaryColor: z.string(),
-    primaryText: z.string(),
-    ctaText: z.string(),
-    ctaColor: z.string(),
-    radius: z.number(),
-  }),
-  websiteTheme: z.object({
-    primaryColor: z.string(),
-    secondaryColor: z.string(),
-  }),
-  businessHours: z.array(
-    z.object({
-      openTime: z.string(),
-      closeTime: z.string(),
-      day: z.string(),
-    })
-  ),
+const accountSchema = z.object({
+  fullName: z.string().min(1, "Full name is required"),
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  phone: z.string().min(1, "Phone number is required"),
+  address: z.string().min(1, "Address is required"),
+  currentPassword: z.string().optional(),
+  newPassword: z.string().optional(),
+  emailNotifications: z.boolean(),
+  smsNotifications: z.boolean(),
 });
 
 function AccountForm() {
   const [isEditing, setIsEditing] = useState(false);
 
-  const form = useForm({
-    validate: zodResolver(storeSchema),
+  const form: any = useForm({
+    validate: zodResolver(accountSchema),
     initialValues: {
-      name: "",
-      categoryId: 1,
-      tagLine: "",
-      description:
-        "We are dedicated to providing the best services to our customers. Your satisfaction is our priority.",
-      storeLogo: "",
-      licenseId: "",
-      address: "",
-      state: "",
-      pincode: "",
-      city: "",
-      latitude: "",
-      longitude: "",
-      qrTheme: {
-        titleFontSize: "24px",
-        primaryColor: "#228be6",
-        secondaryColor: "#ffffff",
-        primaryText: "Scan Here",
-        ctaText: "To View Our Menu",
-        ctaColor: "#fab005",
-        radius: 5,
-      },
-      websiteTheme: {
-        primaryColor: "#fab005",
-        secondaryColor: "#091151",
-        backgroundImage: "",
-        titleColor: "",
-        taglineColor: "",
-        socialLinks: {
-          facebookUrl: "",
-          instagramUrl: "",
-          twitterUrl: "",
-          reviewUrl: "",
-          youtubeUrl: "",
-        },
-      },
-      businessHours: [],
+      fullName: "John Doe",
+      email: "john.doe@example.com",
+      phone: "+1 (555) 555-5555",
+      address: "123 Main St, Anytown, USA",
+      currentPassword: "",
+      newPassword: "",
+      emailNotifications: true,
+      smsNotifications: false,
     },
   });
 
-  // Check if required fields are filled
-  const isFormValid = () => {
-    return (
-      form.values.fullName?.trim() &&
-      form.values.email?.trim() &&
-      form.values.phone?.trim()
-    );
-  };
-
   const handleSave = () => {
-    if (isFormValid()) {
-      // onSave(form.values);
-      setIsEditing(false);
-    }
+    if (form.validate().hasErrors) return; // Validate form before saving
+    console.log("Form saved:", form.values); // Replace with actual save logic
+    setIsEditing(false);
   };
 
   const handleCancel = () => {
@@ -120,18 +58,26 @@ function AccountForm() {
     setIsEditing(false);
   };
 
+  // Example subscription plan (can be dynamic)
+  const subscriptionPlan = "Standard Plan";
+
   return (
-    <div className="bg-white w-fulal mt-5 page-main-wrapper p-[20px] mb-20">
+    <div className="bg-white w-full mt-5 page-main-wrapper p-[20px] mb-20">
       <Paper>
         <Stack gap="xl">
-          <Group mb="md">
+          <Group mb="md" align="flex-start">
             <Avatar size="xl" radius="xl" color="blue">
               {form.values.fullName?.slice(0, 2).toUpperCase() || "U"}
             </Avatar>
             <Box>
-              <Text size="xl" fw={700}>
-                Account Settings
-              </Text>
+              <Group>
+                <Text size="xl" fw={700}>
+                  Account Settings
+                </Text>
+                <Badge color="orange" variant="light" size="lg">
+                  {subscriptionPlan}
+                </Badge>
+              </Group>
               <Text size="sm" c="dimmed">
                 Manage your personal information and preferences
               </Text>
@@ -251,9 +197,7 @@ function AccountForm() {
                 <Button onClick={() => setIsEditing(true)}>Edit Profile</Button>
               ) : (
                 <>
-                  <Button type="submit" disabled={!isFormValid()}>
-                    Save Changes
-                  </Button>
+                  <Button type="submit">Save Changes</Button>
                   <Button variant="outline" onClick={handleCancel}>
                     Cancel
                   </Button>

@@ -137,6 +137,7 @@ function PaymentsPage() {
       <Stack gap={20} mb={20} className=" bg-white shadow-xl">
         <FilterLayout
           filters={filters}
+          searchable={false}
           onSearch={handleSearch}
           // onRecordsPerPageChange={handleRecordsPerPage}
         />

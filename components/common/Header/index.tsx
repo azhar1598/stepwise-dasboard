@@ -9,6 +9,7 @@ import {
   IconInfoOctagonFilled,
   IconBell,
 } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
 function Header() {
   // Mock user data - replace with your actual auth implementation
@@ -18,10 +19,12 @@ function Header() {
     image:
       "https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff",
   };
+  const router = useRouter();
 
   const handleLogout = () => {
     // Add your logout logic here
     console.log("Logging out...");
+    router.push("/login");
   };
 
   return (
@@ -42,10 +45,10 @@ function Header() {
         <Menu position="bottom-end" shadow="md" width={200} withinPortal>
           <Menu.Target>
             <UnstyledButton>
-              <Group spacing="xs">
+              <Group gap="xs">
                 <Avatar src={user.image} radius="xl" size="md" />
-                <Box sx={{ flex: 1 }}>
-                  <Text size="sm" weight={500}>
+                <Box style={{ flex: 1 }}>
+                  <Text size="sm" fw={500}>
                     {user.name}
                   </Text>
                 </Box>
@@ -57,7 +60,7 @@ function Header() {
           <Menu.Dropdown>
             <Menu.Label>{user.email}</Menu.Label>
             <Menu.Item
-              icon={<IconSettings size={14} />}
+              rightSection={<IconSettings size={14} />}
               component="a"
               href="/account"
             >
@@ -73,7 +76,7 @@ function Header() {
             <Menu.Divider />
             <Menu.Item
               color="red"
-              icon={<IconLogout size={14} />}
+              rightSection={<IconLogout size={14} />}
               onClick={handleLogout}
             >
               Logout

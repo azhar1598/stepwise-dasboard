@@ -198,6 +198,7 @@ function CategoryListing() {
       <Stack gap={20} mb={20} className="bg-white shadow-xl">
         <FilterLayout
           filters={!id ? [filters[0]] : filters}
+          searchable={false}
           onSearch={handleSearch}
           //   onRecordsPerPage={handleRecordsPerPage}
         />

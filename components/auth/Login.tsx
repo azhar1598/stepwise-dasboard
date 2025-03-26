@@ -28,6 +28,7 @@ interface PropTypes {
 }
 
 const EnhancedLogin = ({ isMobile, login }: PropTypes) => {
+  const router = useRouter();
   const form = useForm({
     initialValues: {
       email: "admin@gmail.com",
@@ -80,7 +81,8 @@ const EnhancedLogin = ({ isMobile, login }: PropTypes) => {
 
         <form
           onSubmit={form.onSubmit(() => {
-            login.mutate(form);
+            // login.mutate(form);
+            router.push("/");
           })}
         >
           <Stack gap="xs">

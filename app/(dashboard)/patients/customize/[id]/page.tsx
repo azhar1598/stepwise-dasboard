@@ -20,7 +20,7 @@ function page() {
 
   const params = useParams();
 
-  const patientDetailes = patientData.find(
+  const patientDetails = patientData.find(
     (patient) => patient.id === Number(params.id)
   );
 
@@ -28,7 +28,7 @@ function page() {
     <Stack>
       {" "}
       <PageHeader
-        title={`App Settings: ${patientDetailes?.firstName} ${patientDetailes?.lastName}`}
+        title={`App Settings: ${patientDetails?.firstName} ${patientDetails?.lastName}`}
       />
       <PageMainWrapper>
         <PatientAppSettings form={form} saveSettings={() => {}} />

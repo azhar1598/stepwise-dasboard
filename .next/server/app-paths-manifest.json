@@ -1,8 +1,0 @@
-{
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/(dashboard)/patients/customize/[id]/page": "app/(dashboard)/patients/customize/[id]/page.js",
-  "/(dashboard)/patients/page": "app/(dashboard)/patients/page.js",
-  "/(dashboard)/patients/add/page": "app/(dashboard)/patients/add/page.js"
-}

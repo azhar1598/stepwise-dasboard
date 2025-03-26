@@ -17,7 +17,7 @@ import { usePageNotifications } from "@/lib/hooks/useNotifications";
 import { useRouter } from "next/navigation";
 import { patientData } from "@/apiData";
 
-function PatientForm({ form }) {
+function EditPatientForm({ form }) {
   // Validate form fields
 
   console.log(form.values, form, form.isValid(), form.errors, "check");
@@ -156,7 +156,11 @@ function PatientForm({ form }) {
       </Grid>
 
       <Group justify="space-between" mt="xl">
-        <Button type="submit" disabled={!form.isValid()} loading={loading}>
+        <Button
+          type="submit"
+          disabled={!form.isValid() || !form.isDirty()}
+          loading={loading}
+        >
           {form.values.id ? "Update Patient" : "Add Patient"}
         </Button>
       </Group>
@@ -164,4 +168,4 @@ function PatientForm({ form }) {
   );
 }
 
-export default PatientForm;
+export default EditPatientForm;

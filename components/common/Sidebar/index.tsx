@@ -75,7 +75,26 @@ export function Sidebar() {
     if (pathname === "/") {
       return item.link === "/";
     }
-    return pathname.startsWith(item.link); // Fixes incorrect matches
+    if (pathname === "/tasks") {
+      return item.link === "/tasks";
+    }
+    if (pathname === "/patients") {
+      return item.link === "/patients";
+    }
+    if (pathname === "/invoices") {
+      return item.link === "/invoices";
+    }
+    if (pathname === "/study-material") {
+      return item.link === "/study-material";
+    }
+    if (pathname === "/events") {
+      return item.link === "/events";
+    }
+    if (pathname === "/help-desk") {
+      return item.link === "/help-desk";
+    }
+
+    // return pathname.startsWith(item.link); // Fixes incorrect matches
   });
 
   const links = sidebarItems.map((link, index) => (
@@ -98,7 +117,7 @@ export function Sidebar() {
         {/* <Text c={"white"} fw={600} size="22px">
           Tulboxx
         </Text> */}
-        <div className="flex justify-center items-center bg- px-1 w-full h-16">
+        <div className="flex justify-center items-center bg- px-1 w-full h-16 bg-white">
           <Image src={LogoImage} alt="logo" height={150} width={150} />
         </div>
       </Center>
@@ -108,7 +127,8 @@ export function Sidebar() {
           {links}
           <UnstyledButton
             onClick={() => {
-              signOut({ callbackUrl: "/login" });
+              // signOut({ callbackUrl: "/login" });
+              router.push("/login");
             }}
             className={classes.link}
             // data-active={}
