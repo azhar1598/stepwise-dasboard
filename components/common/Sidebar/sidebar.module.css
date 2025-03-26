@@ -2,11 +2,11 @@
   width: 220px;
   min-height: 100vh;
   height: auto;
-  padding-top: 25px;
+  /* padding-top: 25px; */
   /* padding: var(--mantine-spacing-md); */
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  background-color: #2b3033 !important;
+  background-color: #152550 !important;
   flex-direction: column;
   position: fixed;
   /* border-right: 1px solid
@@ -37,7 +37,7 @@
   &[data-active] {
     &,
     &:hover {
-      /* background-color: white; */
+      background-color: white;
 
       transition: 0.5s;
       /* background-size: 200% auto; */

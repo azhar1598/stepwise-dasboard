@@ -24,8 +24,9 @@ import {
 
 export const sidebarItems = [
   // { label: "Generate", icon: IconWandOff, link: "/" },
-
+  { label: "Dashboard", icon: IconFileTime, link: "/" },
   { label: "Patients", icon: IconFileTime, link: "/patients" },
+  { label: "Tasks", icon: IconBook, link: "/tasks" },
   { label: "Insights", icon: IconInvoice, link: "/invoices" },
   { label: "Content", icon: IconNews, link: "/content" },
   // { label: "Clients", icon: IconUser, link: "/clients" },

@@ -19,7 +19,7 @@ import { useRouter, usePathname } from "next/navigation";
 import classes from "./sidebar.module.css";
 import { sidebarItems } from "./sidebar";
 import { signOut } from "next-auth/react";
-import LogoImage from "../../../public/assets/logo/logo.png";
+import LogoImage from "../../../public/stepwise-logo.png";
 import Image from "next/image";
 
 interface NavbarLinkProps {
@@ -56,7 +56,7 @@ function NavbarLink({
       onClick={handleClick}
       className={classes.link}
       data-active={active || undefined}
-      style={{ borderBottom: "0.5px solid gray" }}
+      // style={{ borderBottom: "0.5px solid gray" }}
     >
       <Icon style={{ width: "", height: "100px" }} stroke={1.5} />
       <Text size="14px" ml={10}>
@@ -71,9 +71,12 @@ export function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const activeIndex = sidebarItems.findIndex((item) =>
-    pathname.includes(item.link)
-  );
+  const activeIndex = sidebarItems.findIndex((item) => {
+    if (pathname === "/") {
+      return item.link === "/";
+    }
+    return pathname.startsWith(item.link); // Fixes incorrect matches
+  });
 
   const links = sidebarItems.map((link, index) => (
     <NavbarLink
@@ -92,11 +95,12 @@ export function Sidebar() {
   return (
     <nav className={classes.navbar}>
       <Center>
-        <IconTool color="white" />
-        <Text c={"white"} fw={600} size="22px">
+        {/* <Text c={"white"} fw={600} size="22px">
           Tulboxx
-        </Text>
-        {/* <Image src={LogoImage} alt="logo" height={300} width={300} /> */}
+        </Text> */}
+        <div className="flex justify-center items-center bg- px-1 w-full h-16">
+          <Image src={LogoImage} alt="logo" height={150} width={150} />
+        </div>
       </Center>
 
       <div className={classes.navbarMain}>

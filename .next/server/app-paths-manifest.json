@@ -1,8 +1,8 @@
 {
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(dashboard)/patients/customize/[id]/page": "app/(dashboard)/patients/customize/[id]/page.js",
   "/(dashboard)/patients/page": "app/(dashboard)/patients/page.js",
-  "/(dashboard)/content/page": "app/(dashboard)/content/page.js",
-  "/(dashboard)/account/page": "app/(dashboard)/account/page.js"
+  "/(dashboard)/patients/add/page": "app/(dashboard)/patients/add/page.js"
 }

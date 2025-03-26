@@ -6,32 +6,20 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/page": [
+    "/(dashboard)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/(dashboard)/layout.js"
     ],
     "/api/auth/[...nextauth]/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/auth/[...nextauth]/route.js"
     ],
-    "/(dashboard)/layout": [
+    "/(dashboard)/patients/customize/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/layout.js"
-    ],
-    "/(dashboard)/invoices/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(dashboard)/invoices/page.css",
-      "static/chunks/app/(dashboard)/invoices/page.js"
-    ],
-    "/(dashboard)/content/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(dashboard)/content/page.css",
-      "static/chunks/app/(dashboard)/content/page.js"
+      "static/chunks/app/(dashboard)/patients/customize/[id]/page.js"
     ],
     "/(dashboard)/patients/page": [
       "static/chunks/webpack.js",
@@ -39,10 +27,15 @@
       "static/css/app/(dashboard)/patients/page.css",
       "static/chunks/app/(dashboard)/patients/page.js"
     ],
-    "/(dashboard)/account/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/account/page.js"
+      "static/chunks/app/page.js"
+    ],
+    "/(dashboard)/patients/add/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/patients/add/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",

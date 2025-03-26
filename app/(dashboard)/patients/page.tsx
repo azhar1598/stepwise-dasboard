@@ -35,8 +35,11 @@ import { checkStatus } from "@/lib/constants";
 import { useTableQuery } from "@/lib/hooks/useTableQuery";
 import PreviewQR from "../stores/add/PreviewQR";
 import { PrintLayout } from "../stores/PrintLayout";
+import { patientData } from "@/apiData";
+import { useRouter } from "next/navigation";
 
 function Patients() {
+  const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
   // const [storeId, setStoreId] = useState();
   const [qrCode, setQrCode] = useState("");
@@ -45,9 +48,8 @@ function Patients() {
   const handleModal = (id, record) => {
     // console.log("siteurl", process.env.NEXT_PUBLIC_SITE_URL);
     // setStoreId(id);
-    setQrCode(`${process.env.NEXT_PUBLIC_SITE_URL}/stores/${id}`);
-
-    setStoreInfo(record);
+    // setQrCode(`${process.env.NEXT_PUBLIC_SITE_URL}/stores/${id}`);
+    // setStoreInfo(record);
   };
 
   useEffect(() => {
@@ -55,59 +57,51 @@ function Patients() {
     open();
   }, [qrCode]);
 
-  let columns = [
+  const columns = [
     {
       accessor: "name",
-      title: "Project Name",
-      render: ({ name, tagLine, id }: any) => (
-        <Link
-          href={`/stores/${id}`}
-          style={{ color: "blue", textDecoration: "underline" }}
-        >
-          {name}{" "}
-          <small>
-            <i className="text-gray-500">({tagLine})</i>
-          </small>
-        </Link>
-      ),
+      title: "Name",
+      render: ({ firstName }: any) => firstName || "N/A",
+    },
+
+    {
+      accessor: "diagnosedWith",
+      title: "Diagnosed With",
+      render: ({ diagnosedWith }: any) => diagnosedWith || "N/A",
     },
     {
-      accessor: "estimate",
-      title: "Project Estimate",
-      render: ({ licenseId }: any) => licenseId || "N/A",
+      accessor: "dateOfBirth",
+      title: "Date of Birth",
+      render: ({ dateOfBirth }: any) => dateOfBirth || "N/A",
     },
     {
-      accessor: "customerName",
-      title: "Customer Name",
-      render: ({ city }: any) => city || "N/A",
+      accessor: "gender",
+      title: "Gender",
+      render: ({ gender }: any) => gender || "N/A",
     },
     {
-      accessor: "customerEmail",
-      title: "Customer Email",
-      render: ({ state }: any) => state || "N/A",
+      accessor: "email",
+      title: "Email Address",
+      render: ({ email }: any) => email || "N/A",
     },
     {
-      accessor: "customerPhone",
-      title: "Customer Phone",
-      render: ({ status }: any) => (
-        <Badge color={checkStatus(status)}>{status}</Badge>
-      ),
+      accessor: "phone",
+      title: "Phone Number",
+      render: ({ phone }: any) => phone || "N/A",
     },
 
     {
       accessor: "actions",
-      title: <Box mr={6}>Row actions</Box>,
+      title: <Box mr={6}>Actions</Box>,
       textAlign: "right",
-      render: (record) => (
+      render: (record: any) => (
         <Button
           style={{ fontSize: "12px" }}
           variant="table"
-          onClick={() => {
-            handleModal(record.id, record);
-          }}
+          onClick={() => router.push(`/patients/customize/${record.id}`)}
           leftSection={<IconQrcode size={16} />}
         >
-          Generate QR
+          App Settings
         </Button>
       ),
     },
@@ -196,10 +190,11 @@ function Patients() {
         />
         <CustomTable
           // getStoresQuery?.tableData ||
-          records={[]}
+          records={patientData}
           columns={columns}
-          totalRecords={getStoresQuery?.totalResults || 0}
-          currentPage={getStoresQuery?.currentPage || 0}
+          // totalRecords={getStoresQuery?.totalResults || 0}
+          totalRecords={patientData.length}
+          currentPage={getStoresQuery?.currentPage || 1}
           pageSize={getStoresQuery?.pageSize || 0}
           onPageChange={handlePageChange}
           isLoading={getStoresQuery.isLoading}
